@@ -1,0 +1,11 @@
+[
+  {"code": 65, "label": "A", "sound": "clap", "audio": "clap.wav"},
+  {"code": 83, "label": "S", "sound": "hihat", "audio": "hihat.wav"},
+  {"code": 68, "label": "D", "sound": "kick", "audio": "kick.wav"},
+  {"code": 70, "label": "F", "sound": "openhat", "audio": "openhat.wav"},
+  {"code": 71, "label": "G", "sound": "boom", "audio": "boom.wav"},
+  {"code": 72, "label": "H", "sound": "ride", "audio": "ride.wav"},
+  {"code": 74, "label": "J", "sound": "snare", "audio": "snare.wav"},
+  {"code": 75, "label": "K", "sound": "tom", "audio": "tom.wav"},
+  {"code": 76, "label": "L", "sound": "tink", "audio": "tink.wav"}
+]
