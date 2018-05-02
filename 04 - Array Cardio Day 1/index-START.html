@@ -31,17 +31,28 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const filteredInventors = inventors.filter(inventor => inventor.year > 1500 && inventor.year < 1600);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+    const firstLastName = inventors.map(({ first, last }) => {
+        return { first, last }
+    });
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const sortedInventors = inventors.sort((a, b) => a.year - b.year);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    const lifeSpan = inventors.reduce((counter, inventor) => counter + (inventor.passed - inventor.year), 0);
 
     // 5. Sort the inventors by years lived
+    const yearsLived = inventors.sort((a, b) => {
+        const previousInventor = a.passed - a.year;
+        const currentInventor = b.passed - b.year;
+        return previousInventor > currentInventor ? 1 : -1;
+    });
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
@@ -49,10 +60,25 @@
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const sortedPeople = people.sort((a, b) => {
+        const previousLastName = a.split(',').pop().trim();
+        const currentLastName = b.split(',').pop().trim();
+        return previousLastName > currentLastName ? 1 : -1;
+    });
+    
+    console.warn('sortedPeople', sortedPeople);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    const transportation = data.reduce((obj, vehicle) => {
+        if (!obj[vehicle]) {
+            obj[vehicle] = 0;
+        }
+        obj[vehicle]++;
+        return obj;
+    }, {});
 
   </script>
 </body>
