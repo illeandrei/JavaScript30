@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Type Ahead 👀</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <form class="search-form">
@@ -14,9 +16,51 @@
       <li>or a state</li>
     </ul>
   </form>
-<script>
-const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+  <script>
+    const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
-</script>
-  </body>
+    const form = document.querySelector('form');
+    const input = document.querySelector('input');
+    const suggestions = document.querySelector('.suggestions');
+    let list = [];
+
+    fetch(endpoint)
+      .then(response => response.json())
+      .then(data => list = data);
+
+    function filterCities(value) {
+      const regex = new RegExp(value, 'gi');
+      return list.filter(entry => {
+        return entry.city.match(regex) || entry.state.match(regex);
+      })
+    }
+
+    function numberWithCommas(number) {
+      return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    function displayMatches() {
+      const placesFound = filterCities(this.value);
+      const regex = new RegExp(this.value, 'gi');
+      const html = placesFound.map(place => {
+        const city = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+        const state = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
+
+        console.warn('city:', city);
+
+        return `
+        <li>
+          <span class="name">${city}, ${state}</span>
+          <span class="population">${numberWithCommas(place.population)}</span>
+        </li>`;
+      }).join('');
+      suggestions.innerHTML = html;
+    }
+
+    form.addEventListener('submit', (e) => {e.preventDefault()})
+    input.addEventListener('change', displayMatches);
+
+  </script>
+</body>
+
 </html>
