@@ -7,6 +7,20 @@
 </head>
 <body>
 <script>
+  let sequence = [];
+  const secretCode = 'andrei';
+
+  window.addEventListener('keyup', e => {
+      sequence.push(e.key);
+      sequence.splice(-secretCode.length  - 1, sequence.length - secretCode.length);
+
+      console.log(sequence.join(''));
+
+      if (sequence.join('') === 'andrei') {
+          console.warn('UNLOCKED');
+          cornify_add();
+      }
+  })
 </script>
 </body>
 </html>
