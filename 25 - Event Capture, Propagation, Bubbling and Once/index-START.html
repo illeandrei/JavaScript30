@@ -37,8 +37,26 @@
   }
 </style>
 
-<button></button>
+<button>Click</button>
 <script>
+  const divs = document.querySelectorAll('div');
+
+  function logText(e) {
+      // e.stopPropagation();
+      console.log(this.classList.value);
+  }
+
+  divs.forEach(div => {
+      div.addEventListener('click', logText, {
+          capture: false
+      })
+  });
+
+  document.querySelector('button').addEventListener('click', () => {
+      console.log('clickable only once!');
+  }, {
+      once: true
+  })
 
 </script>
 </body>
